@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101d35" />
+  <meta name="description" content="ViajaYa: descubre destinos increíbles, cotiza tu viaje y empieza tu próxima aventura." />
+  <title>ViajaYa — El mundo te está esperando</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <a class="brand" href="#">
+      <span class="brand-mark"><i data-lucide="plane" style="width:19px;height:19px;"></i></span>
+      viaja<span>ya.</span>
+    </a>
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú">
+      <i data-lucide="menu"></i>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="#destinos">Destinos</a>
+      <a href="/catalogo">Catálogo Completo</a>
+      <a href="#experiencias">Experiencias</a>
+      <a href="#cotizador">Cotiza tu viaje</a>
+      <a href="#nosotros">Nosotros</a>
+      <button type="button" class="nav-reservas-btn" id="open-reservas-btn">
+        <i data-lucide="ticket" style="width:15px;height:15px;"></i> Mis Reservas
+      </button>
+      <a class="nav-cta" href="#cotizador">Planear viaje <i data-lucide="arrow-up-right" style="width:16px;height:16px;"></i></a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+      <div class="hero-orb orb-one"></div>
+      <div class="hero-orb orb-two"></div>
+      <div class="hero-grid"></div>
+
+      <div class="hero-content">
+        <div class="eyebrow light"><span class="eyebrow-dot"></span> TU PRÓXIMA HISTORIA COMIENZA AQUÍ</div>
+        <h1>El mundo es enorme.<br/>Tus ganas de <span class="rotating-word" id="rotating-word">inolvidables</span><i>.</i></h1>
+        <p class="hero-copy">Descubre lugares que te mueven, experiencias que te conectan y viajes diseñados alrededor de lo que te hace feliz.</p>
+        
+        <form class="hero-search" id="hero-search-form">
+          <i data-lucide="map-pin" style="width:20px;height:20px;"></i>
+          <input id="hero-search-input" placeholder="¿A dónde quieres escapar?" aria-label="Buscar destino" />
+          <button type="submit">Explorar <i data-lucide="arrow-right" style="width:17px;height:17px;"></i></button>
+        </form>
+
+        <div class="hero-stats">
+          <div><strong id="stat-destinos">+0</strong><span>destinos por descubrir</span></div>
+          <div><strong id="stat-rating">0★</strong><span>experiencia promedio</span></div>
+          <div><strong id="stat-viajeros">+0k</strong><span>viajeros felices</span></div>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="hero-sun"></div>
+        <div class="hero-land land-back"></div>
+        <div class="hero-land land-front"></div>
+        <div class="hero-sticker sticker-top"><span>✦</span> Tu próxima aventura</div>
+        <div class="hero-sticker sticker-bottom"><span>↗</span> Sal de la rutina</div>
+        <div class="hero-coordinates">6° 14' 45.0" N<br/>75° 34' 05.0" W</div>
+      </div>
+
+      <div class="hero-bottom">
+        <span>DESLIZA PARA DESCUBRIR</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- Destinos Section -->
+    <section class="section destinations" id="destinos">
+      <div class="container">
+        <div class="dest-top">
+          <div class="section-heading reveal">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> LUGARES QUE INSPIRAN</div>
+            <h2>Encuentra tu próximo <em>lugar favorito</em></h2>
+            <p>Desde escapadas junto al mar hasta rincones que parecen de otro planeta. Tu viaje ideal está aquí.</p>
+          </div>
+          <a href="#cotizador" class="text-link">Diseña tu aventura <i data-lucide="arrow-up-right" style="width:17px;height:17px;"></i></a>
+        </div>
+
+        <div class="filters reveal">
+          <div class="category-tabs" id="category-tabs">
+            <button class="active" data-cat="todos">✦ Todos</button>
+            <button data-cat="playa">🏖️ Playa</button>
+            <button data-cat="naturaleza">🌿 Naturaleza</button>
+            <button data-cat="cultura">🎭 Cultura</button>
+            <button data-cat="ciudad">🌆 Ciudad</button>
+          </div>
+          <div class="filter-tools">
+            <select class="sort-select" id="filter-sort" aria-label="Ordenar destinos">
+              <option value="default">✨ Recomendados</option>
+              <option value="precio_asc">💵 Precio: Menor a Mayor</option>
+              <option value="precio_desc">💎 Precio: Mayor a Menor</option>
+              <option value="rating">⭐ Mejor Calificación</option>
+            </select>
+            <label class="search-small">
+              <i data-lucide="search" style="width:16px;height:16px;"></i>
+              <input id="filter-search" placeholder="Buscar lugar..." />
+            </label>
+            <label class="price-filter">
+              <i data-lucide="sliders-horizontal" style="width:16px;height:16px;"></i>
+              <span id="price-filter-label">Hasta $ 2.500.000</span>
+              <input type="range" id="price-filter-input" min="500000" max="2500000" step="50000" value="2500000" aria-label="Precio máximo" />
+            </label>
+          </div>
+        </div>
+
+        <div class="destination-grid" id="destinations-grid">
+          <p>Cargando destinos...</p>
+        </div>
+
+        <div class="center-action">
+          <span id="destinations-count">Mostrando 0 destinos para inspirarte</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cotizador Section -->
+    <section class="section quote-section" id="cotizador">
+      <div class="container">
+        <div class="quote-layout">
+          <div class="quote-intro">
+            <div class="section-heading reveal">
+              <div class="eyebrow"><span class="eyebrow-dot"></span> TU VIAJE, TUS REGLAS</div>
+              <h2>Haz que pase. <em>Cotiza en segundos</em></h2>
+              <p>Ajusta cada detalle y descubre cuánto cuesta esa experiencia que llevas tiempo imaginando.</p>
+            </div>
+            <div class="quote-perks">
+              <div>
+                <span><i data-lucide="wallet"></i></span>
+                <p><b>Precios transparentes</b><small>Sin sorpresas de último minuto.</small></p>
+              </div>
+              <div>
+                <span><i data-lucide="shield-check"></i></span>
+                <p><b>Plan a tu medida</b><small>Elige el ritmo que va contigo.</small></p>
+              </div>
+              <div>
+                <span><i data-lucide="headphones"></i></span>
+                <p><b>Acompañamiento real</b><small>Estamos contigo en cada paso.</small></p>
+              </div>
+            </div>
+            <div class="quote-note">✳ Cotización referencial en pesos colombianos. No representa disponibilidad confirmada.</div>
+          </div>
+
+          <div class="quote-card">
+            <div class="quote-card-head">
+              <div>
+                <span class="eyebrow">ARMEMOS EL PLAN</span>
+                <h3>Tu próxima aventura</h3>
+              </div>
+              <span class="quote-step">01 <i>/ 03</i></span>
+            </div>
+
+            <label class="field-label" for="quote-destination">¿A dónde viajamos?</label>
+            <select class="select-field" id="quote-destination"></select>
+
+            <div class="range-row">
+              <div>
+                <label class="field-label" for="quote-travelers">Viajeros</label>
+                <span class="range-value" id="quote-travelers-val"><i data-lucide="users" style="width:16px;height:16px;"></i>2 personas</span>
+              </div>
+              <input type="range" id="quote-travelers" min="1" max="12" value="2" aria-label="Cantidad de viajeros" />
+            </div>
+
+            <div class="range-row">
+              <div>
+                <label class="field-label" for="quote-days">Duración</label>
+                <span class="range-value" id="quote-days-val"><i data-lucide="calendar-days" style="width:16px;height:16px;"></i>5 días</span>
+              </div>
+              <input type="range" id="quote-days" min="1" max="15" value="5" aria-label="Cantidad de días" />
+            </div>
+
+            <label class="field-label">Elige tu estilo de viaje</label>
+            <div class="style-options" id="style-options">
+              <button type="button" data-style="economico">
+                <span>🎒</span>
+                <b>Económico</b>
+                <small>Lo esencial para explorar</small>
+              </button>
+              <button type="button" data-style="confort" class="selected">
+                <span>✨</span>
+                <b>Confort</b>
+                <small>Equilibrio entre gusto y precio</small>
+              </button>
+              <button type="button" data-style="lujo">
+                <span>🥂</span>
+                <b>Lujo</b>
+                <small>Una experiencia extraordinaria</small>
+              </button>
+            </div>
+
+            <div class="quote-total">
+              <div>
+                <span>INVERSIÓN ESTIMADA</span>
+                <small id="quote-destination-name">Tu destino</small>
+              </div>
+              <strong id="quote-total-amount">—</strong>
+            </div>
+
+            <div class="price-breakdown" id="price-breakdown" style="display:none;">
+              <div><span>Transporte y base</span><b id="bk-transporte">—</b></div>
+              <div><span>Hospedaje y estilo</span><b id="bk-alojamiento">—</b></div>
+              <div><span>Experiencias</span><b id="bk-experiencias">—</b></div>
+              <div><span>Impuestos estimados</span><b id="bk-impuestos">—</b></div>
+            </div>
+
+            <!-- Booking Section -->
+            <div id="booking-container">
+              <form class="booking-form" id="booking-form">
+                <div class="form-title">Solicita tu reserva <span>02 / 03</span></div>
+                <div class="form-grid">
+                  <input required minlength="3" placeholder="Nombre completo" id="booking-name" />
+                  <input required type="email" placeholder="Correo electrónico" id="booking-email" />
+                  <input required type="date" id="booking-date" />
+                </div>
+                <p class="error-text" id="booking-error" style="display:none;" role="alert"></p>
+                <button type="submit" class="button-primary full" id="booking-submit-btn">
+                  Solicitar reserva <i data-lucide="arrow-right" style="width:17px;height:17px;"></i>
+                </button>
+              </form>
+
+              <div class="booking-success" id="booking-success" style="display:none;">
+                <i data-lucide="check-circle-2" style="width:26px;height:26px;"></i>
+                <div>
+                  <b>¡Solicitud registrada!</b>
+                  <span>Tu código es <strong id="booking-code"></strong>. Te contactaremos en breve.</span>
+                </div>
+                <button type="button" id="booking-reset-btn">Nueva solicitud</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="section quiz-section" id="experiencias">
+      <div class="container quiz-layout">
+        <div class="quiz-copy">
+          <div class="section-heading reveal">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> DESCUBRE TU ESENCIA VIAJERA</div>
+            <h2>¿Qué tipo de <em>viajero eres?</em></h2>
+            <p>No todos viajamos igual. Responde tres preguntas rápidas y encuentra un destino que conecte con tu forma de ver el mundo.</p>
+          </div>
+        </div>
+
+        <div class="quiz-card reveal" id="quiz-card">
+          <div class="quiz-top">
+            <span>EL TEST VIAJAYA</span>
+            <span id="quiz-step-label">PREGUNTA 01 / 03</span>
+          </div>
+          <div class="progress-track">
+            <span id="quiz-progress-bar" style="width:33.33%;"></span>
+          </div>
+
+          <div id="quiz-question-box">
+            <h3 id="quiz-question-text">¿Qué paisaje te hace desconectar?</h3>
+            <div class="quiz-options" id="quiz-options"></div>
+            <small class="quiz-foot">No hay respuestas incorrectas. Solo nuevas formas de viajar.</small>
+          </div>
+
+          <div id="quiz-result-box" class="quiz-result" style="display:none;">
+            <span class="result-emoji" id="quiz-res-emoji">🧭</span>
+            <small>TU PRÓXIMA PARADA</small>
+            <h3 id="quiz-res-name">Una nueva aventura</h3>
+            <p id="quiz-res-desc"></p>
+            <button class="button-primary" id="quiz-reset-btn">Volver a jugar <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="section why-section" id="nosotros">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> LA DIFERENCIA VIAJAYA</div>
+          <h2>No vendemos viajes. <em>Creamos recuerdos.</em></h2>
+          <p>Creemos que viajar no es tachar lugares de una lista. Es volver con algo nuevo dentro de ti.</p>
+        </div>
+        <div class="why-grid">
+          <div class="why-item reveal">
+            <div class="why-icon"><i data-lucide="compass"></i></div>
+            <span>01</span>
+            <h3>Viajes con sentido</h3>
+            <p>Creamos experiencias que se sienten tuyas, no itinerarios en serie.</p>
+          </div>
+          <div class="why-item reveal">
+            <div class="why-icon"><i data-lucide="shield-check"></i></div>
+            <span>02</span>
+            <h3>Todo claro desde el inicio</h3>
+            <p>Presupuestos transparentes y opciones pensadas para ti.</p>
+          </div>
+          <div class="why-item reveal">
+            <div class="why-icon"><i data-lucide="heart"></i></div>
+            <span>03</span>
+            <h3>Personas, no algoritmos</h3>
+            <p>Un equipo que escucha, acompaña y resuelve contigo.</p>
+          </div>
+          <div class="why-item reveal">
+            <div class="why-icon"><i data-lucide="globe-2"></i></div>
+            <span>04</span>
+            <h3>El mundo más cerca</h3>
+            <p>Destinos increíbles y experiencias para cada presupuesto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+      <div class="container">
+        <div class="test-head">
+          <div class="section-heading reveal">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> HISTORIAS QUE NOS MUEVEN</div>
+            <h2>Ellos ya se <em>dejaron llevar</em></h2>
+            <p>Cada viaje deja una historia. Estas son algunas de las que nos inspiran a seguir.</p>
+          </div>
+          <div class="rating-note">
+            <strong>4.9/5</strong>
+            <span>★★★★★</span>
+            <small>Experiencias de viajeros</small>
+          </div>
+        </div>
+
+        <div class="testimonial-grid">
+          <article class="testimonial-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Todo estuvo pensado con un cariño increíble. Cartagena nos regaló recuerdos que vamos a guardar siempre.”</p>
+            <div class="reviewer">
+              <div class="avatar avatar-0">L</div>
+              <div><b>Laura M.</b><small>Viaje a Cartagena</small></div>
+              <span>“</span>
+            </div>
+          </article>
+          <article class="testimonial-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Encontré un viaje que se ajustaba a mi presupuesto y terminé viviendo una aventura mucho más grande.”</p>
+            <div class="reviewer">
+              <div class="avatar avatar-1">A</div>
+              <div><b>Andrés R.</b><small>Ruta por el Eje Cafetero</small></div>
+              <span>“</span>
+            </div>
+          </article>
+          <article class="testimonial-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>“La atención fue cercana desde el primer mensaje. Sentí que alguien estaba pendiente de cada detalle.”</p>
+            <div class="reviewer">
+              <div class="avatar avatar-2">C</div>
+              <div><b>Camila P.</b><small>Escapada a Santa Marta</small></div>
+              <span>“</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-cta">
+        <div>
+          <span class="eyebrow light">EL MUNDO NO VA A EXPLORARSE SOLO</span>
+          <h2>Hay un viaje con tu nombre.<br/><em>Vamos a encontrarlo.</em></h2>
+        </div>
+        <a href="#cotizador" class="button-light">Empezar mi viaje <i data-lucide="arrow-up-right" style="width:18px;height:18px;"></i></a>
+      </div>
+
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a class="brand" href="#">
+            <span class="brand-mark"><i data-lucide="plane" style="width:19px;height:19px;"></i></span>
+            viaja<span>ya.</span>
+          </a>
+          <p>Viajar cambia la forma en que miras el mundo. Hagamos que tu próxima historia sea extraordinaria.</p>
+          <div class="socials">
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <b>Explora</b>
+            <a href="#destinos">Destinos</a>
+            <a href="#experiencias">Encuentra tu estilo</a>
+            <a href="#cotizador">Cotizador</a>
+            <a href="#nosotros">Nosotros</a>
+          </div>
+          <div>
+            <b>Estamos cerca</b>
+            <a href="mailto:hola@viajaya.co"><i data-lucide="mail" style="width:14px;height:14px;"></i> hola@viajaya.co</a>
+            <a href="tel:+573001234567"><i data-lucide="phone" style="width:14px;height:14px;"></i> +57 300 123 4567</a>
+            <span><i data-lucide="map-pin" style="width:14px;height:14px;"></i> Medellín, Colombia</span>
+          </div>
+          <div class="newsletter">
+            <b>Una dosis de inspiración</b>
+            <p>Ideas, destinos y planes para tu próxima escapada.</p>
+            <form id="newsletter-form">
+              <input type="email" required placeholder="Tu correo electrónico" id="newsletter-email" />
+              <button aria-label="Suscribirme"><i data-lucide="arrow-right"></i></button>
+            </form>
+            <small class="newsletter-ok" id="newsletter-ok" style="display:none;">¡Gracias! Te tendremos al tanto.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="current-year"></span> ViajaYa. Todos los derechos reservados.</span>
+        <span>Hecho para quienes sienten curiosidad por el mundo <i data-lucide="heart" style="width:13px;height:13px;"></i></span>
+        <div>
+          <a href="#inicio">Privacidad</a>
+          <a href="#inicio">Términos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chat Assistant -->
+  <button class="chat-fab" id="chat-fab" aria-label="Abrir asistente">
+    <span id="chat-fab-icon"><i data-lucide="message-circle"></i></span>
+    <span></span>
+  </button>
+
+  <div class="chat-panel" id="chat-panel" style="display:none;">
+    <div class="chat-head">
+      <div class="chat-avatar">✦</div>
+      <div>
+        <b>Asistente ViajaYa</b>
+        <small><i></i> En línea · listo para ayudarte</small>
+      </div>
+      <button id="chat-close-btn" aria-label="Cerrar"><i data-lucide="x" style="width:18px;height:18px;"></i></button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-bubble assistant">¡Hola! 👋 Soy tu compañero de ViajaYa. ¿Te ayudo a encontrar tu próximo destino?</div>
+    </div>
+    <div class="quick-prompts" id="quick-prompts">
+      <button data-prompt="Quiero viajar barato">Quiero viajar barato</button>
+      <button data-prompt="Recomiéndame una playa">Recomiéndame una playa</button>
+      <button data-prompt="¿Qué destinos tienen?">¿Qué destinos tienen?</button>
+    </div>
+    <form class="chat-input" id="chat-form">
+      <input id="chat-input" placeholder="Escribe tu pregunta..." aria-label="Mensaje" />
+      <button type="submit" id="chat-send-btn" aria-label="Enviar mensaje"><i data-lucide="send" style="width:17px;height:17px;"></i></button>
+    </form>
+    <a class="whatsapp-link" id="whatsapp-chat-link" href="#" target="_blank" rel="noreferrer">
+      Enviar conversación por WhatsApp <i data-lucide="arrow-up-right" style="width:14px;height:14px;"></i>
+    </a>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-backdrop" id="detail-modal-backdrop" style="display:none;" role="presentation">
+    <div class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-dest-title">
+      <button class="modal-close" id="modal-close-btn" aria-label="Cerrar"><i data-lucide="x"></i></button>
+      <div class="modal-art" id="modal-art">
+        <span id="modal-emoji">🏝️</span>
+        <small>VIAJAYA · DESTINO DESTACADO</small>
+      </div>
+      <div class="modal-content">
+        <div class="destination-meta">
+          <span><i data-lucide="map-pin" style="width:13px;height:13px;"></i><span id="modal-pais">Colombia</span></span>
+          <span><i data-lucide="star" style="width:13px;height:13px;fill:currentColor;"></i><span id="modal-rating">4.9</span></span>
+        </div>
+        <h2 id="modal-dest-title">Cartagena</h2>
+        <p id="modal-dest-desc">Descripción del destino...</p>
+        <h4>Experiencias imperdibles</h4>
+        <div class="activity-list" id="modal-activities"></div>
+        <div class="modal-bottom">
+          <div>
+            <small>Desde por persona</small>
+            <strong id="modal-dest-price">$ 0</strong>
+          </div>
+          <button class="button-primary" id="modal-quote-btn">
+            Cotizar este viaje <i data-lucide="arrow-right" style="width:17px;height:17px;"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Gestión de Reservas (Persistencia) -->
+  <div class="modal-backdrop" id="reservas-modal-backdrop" style="display:none;" role="presentation">
+    <div class="bookings-modal" role="dialog" aria-modal="true" aria-labelledby="reservas-modal-title">
+      <div class="bookings-head">
+        <div>
+          <h3 id="reservas-modal-title">Panel de Reservas</h3>
+          <small>Consulta y administra tus solicitudes de viaje</small>
+        </div>
+        <button class="modal-close" id="reservas-close-btn" aria-label="Cerrar"><i data-lucide="x"></i></button>
+      </div>
+      <div class="bookings-search-bar">
+        <input id="reservas-search-input" placeholder="Buscar por código (ej: VY-A1B2C3), nombre o destino..." />
+      </div>
+      <div class="bookings-body" id="reservas-list">
+        <div class="empty-bookings">
+          <p>Cargando reservas registradas...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div id="toast-container"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

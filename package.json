@@ -1,0 +1,12 @@
+{
+  "name": "viajaya-turismo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["frontend", "services/*"],
+  "scripts": {
+    "install:all": "npm install",
+    "dev": "concurrently -k -n GATEWAY,DESTINOS,PAQUETES,CHAT,FRONT -c blue,green,yellow,magenta,cyan \"npm run dev -w gateway\" \"npm run dev -w destinos-service\" \"npm run dev -w paquetes-service\" \"npm run dev -w chat-service\" \"npm run dev -w frontend\"",
+    "start": "concurrently -k -n GATEWAY,DESTINOS,PAQUETES,CHAT,FRONT \"npm run start -w gateway\" \"npm run start -w destinos-service\" \"npm run start -w paquetes-service\" \"npm run start -w chat-service\" \"npm run start -w frontend\""
+  },
+  "devDependencies": { "concurrently": "^9.1.2" }
+}

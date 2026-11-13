@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101d35" />
+  <meta name="description" content="Catálogo completo de viajes y destinos de ViajaYa." />
+  <title>Catálogo de Viajes — ViajaYa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header scrolled" id="header">
+    <a class="brand" href="/">
+      <span class="brand-mark"><i data-lucide="plane" style="width:19px;height:19px;"></i></span>
+      viaja<span>ya.</span>
+    </a>
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú">
+      <i data-lucide="menu"></i>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="/">Inicio</a>
+      <a href="/catalogo" style="color:var(--orange);">Catálogo Completo</a>
+      <a href="/#cotizador">Cotizador</a>
+      <button type="button" class="nav-reservas-btn" id="open-reservas-btn">
+        <i data-lucide="ticket" style="width:15px;height:15px;"></i> Mis Reservas
+      </button>
+      <a class="nav-cta" href="/#cotizador">Planear viaje <i data-lucide="arrow-up-right" style="width:16px;height:16px;"></i></a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Catalog Hero -->
+    <section class="catalog-hero">
+      <div class="container">
+        <div class="eyebrow light" style="justify-content:center;">
+          <span class="eyebrow-dot"></span> EXPLORA COLOMBIA A TU MANERA
+        </div>
+        <h1>Catálogo de Destinos y Ciudades</h1>
+        <p>Descubre las 5 principales ciudades de Colombia y paraísos naturales. Conoce detalles, itinerarios y cotiza en segundos.</p>
+        <button type="button" class="btn-crear-viaje" id="open-crear-viaje-btn">
+          <i data-lucide="plus-circle" style="width:18px;height:18px;"></i> Publicar / Crear Nuevo Viaje
+        </button>
+      </div>
+    </section>
+
+    <!-- Catalog Main Content -->
+    <section class="section" style="padding-top:40px;background:var(--cream);">
+      <div class="container">
+
+        <!-- Controls Toolbar -->
+        <div class="catalog-controls">
+          <div class="category-tabs" id="category-tabs">
+            <button class="active" data-cat="todos">✦ Todos</button>
+            <button data-cat="ciudad">🌆 Ciudades</button>
+            <button data-cat="playa">🏖️ Playa</button>
+            <button data-cat="naturaleza">🌿 Naturaleza</button>
+            <button data-cat="cultura">🎭 Cultura</button>
+          </div>
+
+          <div class="filter-tools">
+            <select class="sort-select" id="filter-sort" aria-label="Ordenar destinos">
+              <option value="default">✨ Recomendados</option>
+              <option value="precio_asc">💵 Precio: Menor a Mayor</option>
+              <option value="precio_desc">💎 Precio: Mayor a Menor</option>
+              <option value="rating">⭐ Mejor Calificación</option>
+            </select>
+            <label class="search-small">
+              <i data-lucide="search" style="width:16px;height:16px;"></i>
+              <input id="filter-search" placeholder="Buscar ciudad, destino..." />
+            </label>
+            <label class="price-filter">
+              <i data-lucide="sliders-horizontal" style="width:16px;height:16px;"></i>
+              <span id="price-filter-label">Hasta $ 2.500.000</span>
+              <input type="range" id="price-filter-input" min="500000" max="2500000" step="50000" value="2500000" aria-label="Precio máximo" />
+            </label>
+          </div>
+        </div>
+
+        <!-- Grid de Destinos con Imágenes Reales -->
+        <div class="destination-grid" id="destinations-grid">
+          <p>Cargando catálogo completo...</p>
+        </div>
+
+        <div class="center-action" style="margin-top:40px;">
+          <span id="destinations-count">Mostrando destinos disponibles</span>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Crear Nuevo Viaje -->
+  <div class="modal-backdrop" id="crear-viaje-modal" style="display:none;" role="presentation">
+    <div class="modal-crear-viaje" role="dialog" aria-modal="true" aria-labelledby="crear-viaje-title">
+      <div class="bookings-head">
+        <div>
+          <h3 id="crear-viaje-title">Publicar Nuevo Viaje</h3>
+          <small>Agrega un nuevo destino turístico al catálogo</small>
+        </div>
+        <button class="modal-close" id="crear-viaje-close-btn" aria-label="Cerrar"><i data-lucide="x"></i></button>
+      </div>
+
+      <form id="form-crear-viaje" class="form-crear-grid">
+        <label>
+          Nombre del Viaje *
+          <input required minlength="3" id="nuevo-nombre" placeholder="Ej: Manizales y Nevado" />
+        </label>
+        <label>
+          Ciudad Principal *
+          <input required minlength="2" id="nuevo-ciudad" placeholder="Ej: Manizales" />
+        </label>
+        <label>
+          Categoría *
+          <select id="nuevo-categoria">
+            <option value="ciudad">🌆 Ciudad</option>
+            <option value="playa">🏖️ Playa</option>
+            <option value="naturaleza">🌿 Naturaleza</option>
+            <option value="cultura">🎭 Cultura</option>
+          </select>
+        </label>
+        <label>
+          Precio Base por Persona (COP) *
+          <input required type="number" min="200000" step="50000" id="nuevo-precio" placeholder="Ej: 850000" />
+        </label>
+        <label>
+          Duración del Viaje (días)
+          <input type="number" min="1" max="30" id="nuevo-dias" value="3" />
+        </label>
+        <label>
+          Mejor Época para Visitar
+          <input id="nuevo-epoca" placeholder="Ej: Diciembre a marzo" value="Todo el año" />
+        </label>
+        <label class="full-span">
+          URL de la Imagen (Unsplash o enlace directo)
+          <input type="url" id="nuevo-imagen" placeholder="https://images.unsplash.com/photo-..." />
+        </label>
+        <label class="full-span">
+          Descripción del Viaje *
+          <textarea required rows="3" id="nuevo-desc" placeholder="Describe brevemente la experiencia que vivirá el viajero..."></textarea>
+        </label>
+        <label class="full-span">
+          Actividades Destacadas (separadas por coma)
+          <input id="nuevo-actividades" placeholder="Ej: Recorrido termal, Visita a cafetal, Caminata ecológica" />
+        </label>
+        <div class="full-span" style="display:flex;justify-content:flex-end;gap:12px;margin-top:10px;">
+          <button type="button" class="button-light" id="crear-viaje-cancel-btn" style="border:1px solid #ccc;color:#333;">Cancelar</button>
+          <button type="submit" class="button-primary">Publicar Viaje <i data-lucide="check" style="width:16px;height:16px;"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-backdrop" id="detail-modal-backdrop" style="display:none;" role="presentation">
+    <div class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-dest-title">
+      <button class="modal-close" id="modal-close-btn" aria-label="Cerrar"><i data-lucide="x"></i></button>
+      <div class="modal-art" id="modal-art">
+        <span id="modal-emoji">🏝️</span>
+        <small>VIAJAYA · DESTINO DESTACADO</small>
+      </div>
+      <div class="modal-content">
+        <div class="destination-meta">
+          <span><i data-lucide="map-pin" style="width:13px;height:13px;"></i><span id="modal-pais">Colombia</span></span>
+          <span><i data-lucide="star" style="width:13px;height:13px;fill:currentColor;"></i><span id="modal-rating">4.9</span></span>
+        </div>
+        <h2 id="modal-dest-title">Cartagena</h2>
+        <p id="modal-dest-desc">Descripción del destino...</p>
+        <h4>Experiencias imperdibles</h4>
+        <div class="activity-list" id="modal-activities"></div>
+        <div class="modal-bottom">
+          <div>
+            <small>Desde por persona</small>
+            <strong id="modal-dest-price">$ 0</strong>
+          </div>
+          <button class="button-primary" id="modal-quote-btn">
+            Cotizar este viaje <i data-lucide="arrow-right" style="width:17px;height:17px;"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Panel de Reservas -->
+  <div class="modal-backdrop" id="reservas-modal-backdrop" style="display:none;" role="presentation">
+    <div class="bookings-modal" role="dialog" aria-modal="true" aria-labelledby="reservas-modal-title">
+      <div class="bookings-head">
+        <div>
+          <h3 id="reservas-modal-title">Panel de Reservas</h3>
+          <small>Consulta y administra tus solicitudes de viaje</small>
+        </div>
+        <button class="modal-close" id="reservas-close-btn" aria-label="Cerrar"><i data-lucide="x"></i></button>
+      </div>
+      <div class="bookings-search-bar">
+        <input id="reservas-search-input" placeholder="Buscar por código (ej: VY-A1B2C3), nombre o destino..." />
+      </div>
+      <div class="bookings-body" id="reservas-list">
+        <div class="empty-bookings">
+          <p>Cargando reservas registradas...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Assistant -->
+  <button class="chat-fab" id="chat-fab" aria-label="Abrir asistente">
+    <span id="chat-fab-icon"><i data-lucide="message-circle"></i></span>
+    <span></span>
+  </button>
+
+  <div class="chat-panel" id="chat-panel" style="display:none;">
+    <div class="chat-head">
+      <div class="chat-avatar">✦</div>
+      <div>
+        <b>Asistente ViajaYa</b>
+        <small><i></i> En línea · listo para ayudarte</small>
+      </div>
+      <button id="chat-close-btn" aria-label="Cerrar"><i data-lucide="x" style="width:18px;height:18px;"></i></button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-bubble assistant">¡Hola! 👋 Soy tu compañero de ViajaYa. ¿Te ayudo a explorar los viajes del catálogo?</div>
+    </div>
+    <div class="quick-prompts" id="quick-prompts">
+      <button data-prompt="Quiero viajar barato">Quiero viajar barato</button>
+      <button data-prompt="Recomiéndame una playa">Recomiéndame una playa</button>
+      <button data-prompt="¿Qué ciudades tienen?">¿Qué ciudades tienen?</button>
+    </div>
+    <form class="chat-input" id="chat-form">
+      <input id="chat-input" placeholder="Escribe tu pregunta..." aria-label="Mensaje" />
+      <button type="submit" id="chat-send-btn" aria-label="Enviar mensaje"><i data-lucide="send" style="width:17px;height:17px;"></i></button>
+    </form>
+    <a class="whatsapp-link" id="whatsapp-chat-link" href="#" target="_blank" rel="noreferrer">
+      Enviar conversación por WhatsApp <i data-lucide="arrow-up-right" style="width:14px;height:14px;"></i>
+    </a>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <footer class="footer" style="padding:40px 0 20px;margin-top:60px;">
+    <div class="container" style="text-align:center;">
+      <p style="color:#9ab0c8;font-size:12px;margin:0;">
+        © <span id="current-year"></span> ViajaYa · Catálogo Oficial de Destinos y Ciudades de Colombia
+      </p>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

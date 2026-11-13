@@ -1,0 +1,30 @@
+[
+  {
+    "codigo": "VY-1A9ABC",
+    "nombre": "santiago",
+    "correo": "santiago@gmail.com",
+    "destino": "Cartagena de Indias",
+    "destinoId": "cartagena",
+    "personas": 4,
+    "dias": 15,
+    "estilo": "lujo",
+    "fecha": "2026-11-14",
+    "total": 72662400,
+    "estado": "confirmada",
+    "creadaEn": "2026-11-13T14:24:27.498Z"
+  },
+  {
+    "codigo": "VY-DEMO01",
+    "nombre": "Carolina Herrera",
+    "correo": "carolina.viajes@ejemplo.com",
+    "destino": "Cartagena de Indias",
+    "destinoId": "cartagena",
+    "personas": 2,
+    "dias": 4,
+    "estilo": "confort",
+    "fecha": "2026-12-15",
+    "total": 3132000,
+    "estado": "confirmada",
+    "creadaEn": "2026-11-13T08:30:00.000Z"
+  }
+]
